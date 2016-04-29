@@ -16,6 +16,12 @@ class User < ActiveRecord::Base
     find_by_email(email).try(:authenticate, password)
   end
 
+  def role?(authorized_role)
+    role = self.employee.role unless self.employee == nil
+    return false if role.nil?
+    role.to_sym == authorized_role
+  end
+
   private
   def employee_is_active_in_system
     is_active_in_system(:employee)

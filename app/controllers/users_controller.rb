@@ -1,15 +1,14 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update]
+  load_and_authorize_resource
 
   def new
     @user = User.new
   end
 
   def edit
-    if current_user.role?(:admin)
-      @user = current_user
-    end
+    @user = current_user
   end
 
   def create
@@ -23,13 +22,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.role?(:admin)
-      @user = current_user
-      if @user.update_attributes(user_params)
-        redirect_to(@user, :notice => 'User was successfully updated.')
-      else
-        render :action => "edit"
-      end
+    @user = current_user
+    if @user.update_attributes(user_params)
+      redirect_to(@user, :notice => 'User was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
