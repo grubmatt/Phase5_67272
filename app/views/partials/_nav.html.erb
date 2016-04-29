@@ -7,7 +7,6 @@
           <li><%= link_to "Stores", stores_path %></li>
         <% else %>
           <li><%= link_to 'Logout', logout_path %></li>
-          <br>[<%= current_user.proper_name %>:<%= current_user.role %>]
           <!-- options for stores -->
           <li class="has-dropdown">
             <%= link_to "Stores", stores_path %>
