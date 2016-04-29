@@ -2,35 +2,39 @@
   <nav class="top-bar" data-topbar role="navigation"> 
     <section class="top-bar-section">
       <ul class="left">
-        <!-- link to home -->
-        <li><%= link_to "Home", home_path %></li>
+        <% if !logged_in? %>
+          <li><%= link_to 'Login', login_path %></li>
+          <li><%= link_to "Stores", stores_path %></li>
+        <% else %>
+          <li><%= link_to 'Logout', logout_path %></li>
+          <br>[<%= current_user.proper_name %>:<%= current_user.role %>]
+          <!-- options for stores -->
+          <li class="has-dropdown">
+            <%= link_to "Stores", stores_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Store List", stores_path %></li>
+              <li><%= link_to "Add a Store", new_store_path %></li>
+            </ul>
+          </li>
 
-        <!-- options for stores -->
-        <li class="has-dropdown">
-          <%= link_to "Stores", stores_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Store List", stores_path %></li>
-            <li><%= link_to "Add a Store", new_store_path %></li>
-          </ul>
-        </li>
+          <!-- options for employees -->
+          <li class="has-dropdown">
+            <%= link_to "Employees", employees_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Employee List", employees_path %></li>
+              <li><%= link_to "Add an Employee", new_employee_path %></li>
+            </ul>
+          </li>
 
-        <!-- options for employees -->
-        <li class="has-dropdown">
-          <%= link_to "Employees", employees_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Employee List", employees_path %></li>
-            <li><%= link_to "Add an Employee", new_employee_path %></li>
-          </ul>
-        </li>
-
-        <!-- options for assignments -->
-        <li class="has-dropdown">
-          <%= link_to "Assignments", assignments_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Assignments List", assignments_path %></li>
-            <li><%= link_to "Create New Assignment", new_assignment_path %></li>
-          </ul>
-        </li>
+          <!-- options for assignments -->
+          <li class="has-dropdown">
+            <%= link_to "Assignments", assignments_path %>
+            <ul class="dropdown">
+              <li><%= link_to "Assignments List", assignments_path %></li>
+              <li><%= link_to "Create New Assignment", new_assignment_path %></li>
+            </ul>
+          </li>
+        <% end %>
       </ul>
 
     </section>
