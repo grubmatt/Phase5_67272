@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     role.to_sym == authorized_role
   end
 
+  def store_id
+    self.employee.current_assignment.store_id
+  end
+
   private
   def employee_is_active_in_system
     is_active_in_system(:employee)

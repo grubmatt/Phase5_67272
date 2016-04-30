@@ -8,19 +8,19 @@ class Ability
     elsif user.role? :manager
       can :read, [Store, Job, Flavor]
       can :read, Employee do |employee|
-        employee.assignment.store_id = user.employee.assignment.store_id
+        employee.current_assignment.store_id = user.store_id
       end
       can :read, Assignment do |assignment|
-        assignment.store_id = user.employee.assignment.store_id
+        current_assignment.store_id = user.store_id
       end
       can :crud, Shift do |shift|
-        shift.store.id = user.employee.assignment.store_id
+        shift.store.id = user.store_id
       end
       can [:read, :create, :destroy], ShiftJob do |shiftjob|
-        shiftjob.shift.assignment.store_id = user.employee.assignment.store_id
+        shiftjob.shift.current_assignment.store_id = user.store_id
       end
       can [:read, :create, :destroy], StoreFlavor do |storeflavor|
-        storeflavor.store.id = user.employee.assignment.store_id
+        storeflavor.store.id = user.store_id
       end
     elsif user.role? :employee
       can :read, [Store, Job, Flavor]
