@@ -4,41 +4,43 @@
       <ul class="left">
         <% if !logged_in? %>
           <li><%= link_to 'Login', login_path %></li>
-          <li><%= link_to "Stores", stores_path %></li>
         <% else %>
           <li><%= link_to 'Logout', logout_path %></li>
-          <!-- options for stores -->
+        <% end %>  
+
+        <% if current_user.role?(:admin) %>
           <li class="has-dropdown">
             <%= link_to "Stores", stores_path %>
             <ul class="dropdown">
               <li><%= link_to "Store List", stores_path %></li>
-              <% if can? :create, Store %>
-                <li><%= link_to "Add a Store", new_store_path %></li>
-              <% end %>
+              <li><%= link_to "Add a Store", new_store_path %></li>
             </ul>
           </li>
 
-          <!-- options for employees -->
           <li class="has-dropdown">
             <%= link_to "Employees", employees_path %>
             <ul class="dropdown">
               <li><%= link_to "Employee List", employees_path %></li>
-              <% if can? :create, Employee %>
-                <li><%= link_to "Add an Employee", new_employee_path %></li>
-              <% end %>
+              <li><%= link_to "Add an Employee", new_employee_path %></li>
             </ul>
           </li>
 
-          <!-- options for assignments -->
           <li class="has-dropdown">
             <%= link_to "Assignments", assignments_path %>
             <ul class="dropdown">
               <li><%= link_to "Assignments List", assignments_path %></li>
-              <% if can? :create, Assignment %>
-                <li><%= link_to "Create New Assignment", new_assignment_path %></li>
-              <% end %>
+              <li><%= link_to "Create New Assignment", new_assignment_path %></li>
             </ul>
           </li>
+        <% elsif current_user.role?(:manager) %>
+          <li><%= link_to "Stores", stores_path %></li>
+          <li><%= link_to "Employees", employees_path %></li>
+          <li><%= link_to "Assignments", assignments_path %></li>
+        <% elsif current_user.role?(:employee) %>
+          <li><%= link_to "Stores", stores_path %></li>
+          <li><%= link_to "Employee Info", employee_path(current_user.employee) %></li>
+        <% else %> 
+          <li><%= link_to "Stores", stores_path %></li>
         <% end %>
       </ul>
 

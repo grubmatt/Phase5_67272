@@ -1,8 +1,10 @@
   <% opt = "#{object.respond_to?(:name) ? object.name : model_name.capitalize }" %>
 
   <div class="form-actions">
-    <%= link_to(eval("#{model_name.pluralize}_path"), class: 'button radius') do %>
+    <% if can? :read, model_name %>
+      <%= link_to(eval("#{model_name.pluralize}_path"), class: 'button radius') do %>
       &nbsp;Display All <%= model_name.pluralize.capitalize %>
+      <% end %>
     <% end %>
     &nbsp;&nbsp;
     

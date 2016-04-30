@@ -24,8 +24,12 @@ class Ability
       end
     elsif user.role? :employee
       can :read, [Store, Job, Flavor]
-      can :read, [Employee, User, Assignment, Shift],
-        :id => user.id
+      can :read, Employee, :id => user.employee_id
+      can :read, User, :id => user.id
+      can :read, Assignment, :id => user.employee.current_assignment.id
+      can :read, Shift do |shift|
+        shift.assignment.id = user.employee.current_assignment.id
+      end 
     else
       can :read, Store
     end
