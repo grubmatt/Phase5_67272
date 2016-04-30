@@ -12,7 +12,9 @@
             <%= link_to "Stores", stores_path %>
             <ul class="dropdown">
               <li><%= link_to "Store List", stores_path %></li>
-              <li><%= link_to "Add a Store", new_store_path %></li>
+              <% if can? :create, Store %>
+                <li><%= link_to "Add a Store", new_store_path %></li>
+              <% end %>
             </ul>
           </li>
 
@@ -21,7 +23,9 @@
             <%= link_to "Employees", employees_path %>
             <ul class="dropdown">
               <li><%= link_to "Employee List", employees_path %></li>
-              <li><%= link_to "Add an Employee", new_employee_path %></li>
+              <% if can? :create, Employee %>
+                <li><%= link_to "Add an Employee", new_employee_path %></li>
+              <% end %>
             </ul>
           </li>
 
@@ -30,7 +34,9 @@
             <%= link_to "Assignments", assignments_path %>
             <ul class="dropdown">
               <li><%= link_to "Assignments List", assignments_path %></li>
-              <li><%= link_to "Create New Assignment", new_assignment_path %></li>
+              <% if can? :create, Assignment %>
+                <li><%= link_to "Create New Assignment", new_assignment_path %></li>
+              <% end %>
             </ul>
           </li>
         <% end %>

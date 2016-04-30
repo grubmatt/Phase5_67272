@@ -16,7 +16,9 @@
   <%= number_to_phone @store.phone %>
 </p>
 
-<p>
-  <b>Active:</b> 
-  <%= @store.active ? "Yes" : "No" %>
-</p>
+<% if can? :update, Store %>
+  <p>
+    <b>Active:</b> 
+    <%= @store.active ? "Yes" : "No" %>
+  </p>
+<% end %>

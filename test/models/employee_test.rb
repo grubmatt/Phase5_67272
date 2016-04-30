@@ -6,6 +6,8 @@ class EmployeeTest < ActiveSupport::TestCase
   should have_many(:stores).through(:assignments)
   should have_many(:shifts).through(:assignments)
   should have_one(:user).dependent(:destroy)
+
+  should accept_nested_attributes_for(:user)
   
   # Test basic validations
   should validate_presence_of(:first_name)

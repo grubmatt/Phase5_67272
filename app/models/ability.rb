@@ -16,11 +16,11 @@ class Ability
       can :crud, Shift do |shift|
         shift.store.id = user.employee.assignment.store_id
       end
-      can [:read, :create, :destroy], Shift_Job do |shiftjob|
+      can [:read, :create, :destroy], ShiftJob do |shiftjob|
         shiftjob.shift.assignment.store_id = user.employee.assignment.store_id
       end
-      can [:read, :create, :destroy], Shift_Flavor do |shiftflavor|
-        shiftflavor.store.id = user.employee.assignment.store_id
+      can [:read, :create, :destroy], StoreFlavor do |storeflavor|
+        storeflavor.store.id = user.employee.assignment.store_id
       end
     elsif user.role? :employee
       can :read, [Store, Job, Flavor]

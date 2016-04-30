@@ -1,4 +1,4 @@
-<%= simple_form_for @employee, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_nested_form_for @employee, html: { class: 'form-horizontal' } do |f| %>
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Employee</legend>
 
@@ -12,6 +12,12 @@
     <%= f.input :phone, input_html: {class: "avg"} %>
     <%= f.input :role, collection: Employee::ROLES_LIST, include_blank: true, input_html: {class: "avg"} %>
     <%= f.input :active %>
+
+    <%= f.simple_fields_for :user do |user_form| %>
+      <%= user_form.input :email, input_html: {class: "avg"} %> 
+      <%= user_form.input :password, input_html: {class: "avg"} %> 
+      <%= user_form.input :password_confirmation, input_html: {class: "avg"} %> 
+    <% end %>
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'button radius' %>
