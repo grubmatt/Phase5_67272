@@ -20,8 +20,10 @@
           <td><%= link_to employee.current_assignment.store.name, store_path(employee.current_assignment.store) unless employee.current_assignment.nil? %></td>
           <td><%= employee.role.capitalize %></td>
           <td>
-            <%= link_to(edit_employee_path(employee), class: 'button tiny radius warning') do %>
+            <% if can? :update, Employee%>
+              <%= link_to(edit_employee_path(employee), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;
+              <% end %>
             <% end %>
           </td>
         </tr>

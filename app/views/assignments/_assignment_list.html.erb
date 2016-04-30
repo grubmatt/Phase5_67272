@@ -26,8 +26,10 @@
             <td><%= assignment.end_date.strftime("%m/%d/%y") %></td>
           <% end %>
           <td>
-            <%= link_to(edit_assignment_path(assignment), class: 'button tiny radius warning') do %>
+            <% if can? :update, Assignment %>
+              <%= link_to(edit_assignment_path(assignment), class: 'button tiny radius warning') do %>
               &nbsp;Edit&nbsp;
+              <% end %>
             <% end %>
           </td>
         </tr>
