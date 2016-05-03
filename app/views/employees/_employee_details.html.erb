@@ -18,9 +18,15 @@
 </p>
 
 <p>
-  <b>Role:</b> <%= @employee.role.capitalize %>
+  <b>Email:</b> <%= @user.email %>
 </p>
 
-<p>
-  <b>Active:</b> <%= @employee.active ? "Yes" : "No" %>
-</p>
+<% if current_user.role?(:admin) %>
+  <p>
+    <b>Role:</b> <%= @employee.role.capitalize %>
+  </p>
+
+  <p>
+    <b>Active:</b> <%= @employee.active ? "Yes" : "No" %>
+  </p>
+<% end %>

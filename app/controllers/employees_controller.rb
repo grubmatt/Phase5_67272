@@ -15,6 +15,7 @@ class EmployeesController < ApplicationController
   def show
     # get the assignment history for this employee
     @assignments = @employee.assignments.chronological.paginate(page: params[:page]).per_page(5)
+    @user = @employee.user    
     # get upcoming shifts for this employee (later)  
   end
 
