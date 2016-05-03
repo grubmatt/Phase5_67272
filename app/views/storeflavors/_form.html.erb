@@ -1,0 +1,19 @@
+<%= simple_form_for @store_flavor, url: stores_path, html: { class: 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Store Flavor</legend>
+
+    <% if current_user.role?(:manager)%>
+      <%= f.input :store_id, default: current_user.store_id, :collection => Store.active.alphabetical, :include_blank => true, input_html: {class: "avg"} %>
+    <% else %>
+      <%= f.input :store_id, :collection => Store.active.alphabetical, input_html: {class: "avg"} %>
+    <% end %>
+    
+    <%= f.input :flavor_id, :collection => Flavor.active.alphabetical, input_html: {class: "avg"} %>
+    
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'button radius' %>
+      <%= link_to 'Cancel', stores_path, :class => 'button alert radius' %>
+    </div>
+  </fieldset>
+<% end %>

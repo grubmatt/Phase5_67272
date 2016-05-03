@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
     elsif user.role? :manager
       can :read, [Store, Job, Flavor]
+      can :update, Employee, :id => user.employee_id
       can :read, Employee do |employee|
         employee.current_assignment.store_id = user.store_id
       end
@@ -20,7 +21,7 @@ class Ability
         shiftjob.shift.current_assignment.store_id = user.store_id
       end
       can [:read, :create, :destroy], StoreFlavor do |storeflavor|
-        storeflavor.store.id = user.store_id
+        storeflavor.store_id = user.store_id
       end
     elsif user.role? :employee
       can :read, [Store, Job, Flavor]

@@ -13,6 +13,13 @@
     <% end %>
   </tbody>
 </table>
+
+<% if (can? :create, StoreFlavor) & (current_user.store_id == @current_flavors.first.store_id) %>
+  <%= link_to(new_storeflavor_path, class: 'button radius') do %>
+    &nbsp;<%= "Add Flavor" %>
+  <% end %>
+<% end %>
+    &nbsp;&nbsp;
 <%= will_paginate @current_flavors, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
 
 

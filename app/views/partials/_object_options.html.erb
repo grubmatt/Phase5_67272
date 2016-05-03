@@ -8,7 +8,7 @@
     <% end %>
     &nbsp;&nbsp;
     
-    <% if (can? :update, model_name) or (model_name = "employee") %>
+    <% if can? :update, object %>
       <%= link_to(eval("edit_#{model_name}_path(object)"), class: 'button radius') do %>
         &nbsp;<%= "Edit #{opt}" %>
       <% end %>
