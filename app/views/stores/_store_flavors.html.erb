@@ -4,7 +4,7 @@
     <tr>
       <th>Name</th>
       <% if (can? :destroy, StoreFlavor) & (current_user.store_id == @current_flavors.first.store_id)%>
-        <th>Remove</th>
+        <th>&nbsp;</th>
       <% end %>
     </tr>
   </thead>

@@ -29,6 +29,7 @@ class ShiftsController < ApplicationController
   end
 
   def show
+  	@shift_jobs = ShiftJob.for_shift(@shift.id).paginate(page: params[:page]).per_page(5)
   end
 
   def create

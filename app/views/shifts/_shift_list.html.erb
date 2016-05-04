@@ -17,9 +17,7 @@
         <% if current_user.role?(:admin) %>
           <th>&nbsp;</th>
         <% end %>
-        <% if current_user.role?(:manager) %>
-          <th>&nbsp;</th>
-        <% end %>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -39,7 +37,7 @@
             &nbsp;Edit&nbsp;
             <% end %></td>
           <% end %>
-          <td><%= link_to(show_shift_path(shift), class: 'button tiny radius') do %>
+          <td><%= link_to(shift_path(shift), class: 'button tiny radius') do %>
           &nbsp;View Shift&nbsp;
           <% end %></td>
         </tr>

@@ -1,0 +1,33 @@
+<h3>Completed Jobs</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <% if can? :destroy, ShiftJob %>
+        <th>Remove</th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shift_jobs.each do |shiftjob| %>
+      <tr>
+        <td> <%= shiftjob.job.name %></td>
+        <td> <%= shiftjob.job.description %></td>
+        <% if can? :destroy, ShiftJob %>
+          <td><%= link_to(eval("shift_job_path(shiftjob)"), method: 'delete', class: 'button radius alert') do %>
+          &nbsp;Remove&nbsp;</td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if can? :create, ShiftJob %>
+  <%= link_to(new_shift_job_path, class: 'button radius') do %>
+    &nbsp;<%= "Add Job" %>
+  <% end %>
+<% end %>
+    &nbsp;&nbsp;
+<%= will_paginate @shift_jobs, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
