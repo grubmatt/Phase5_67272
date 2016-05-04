@@ -3,7 +3,7 @@
     <legend><%= controller.action_name.capitalize %> Store Flavor</legend>
 
     <% if current_user.role?(:manager)%>
-      <%= f.input :store_id, :collection => Store.active.alphabetical, selected: current_user.store_id, input_html: {class: "avg"} %>
+      <%= f.input :store_id, :collection => Store.for_store(current_user.store_id),selected: current_user.store_id, input_html: {class: "avg"} %>
     <% else %>
       <%= f.input :store_id, :collection => Store.active.alphabetical, input_html: {class: "avg"} %>
     <% end %>

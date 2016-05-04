@@ -33,13 +33,30 @@
                 <li><%= link_to "Create New Assignment", new_assignment_path %></li>
               </ul>
             </li>
+
+            <li class="has-dropdown">
+              <%= link_to "Shifts", shifts_path %>
+              <ul class="dropdown">
+                <li><%= link_to "Shift List", shifts_path %></li>
+                <li><%= link_to "Create New Shift", new_shift_path %></li>
+              </ul>
+            </li>
+
           <% elsif current_user.role?(:manager) %>
             <li><%= link_to "Stores", stores_path %></li>
             <li><%= link_to "Employees", employees_path %></li>
             <li><%= link_to "Assignments", assignments_path %></li>
+            <li class="has-dropdown">
+              <%= link_to "Shifts", shifts_path %>
+              <ul class="dropdown">
+                <li><%= link_to "Shift List", shifts_path %></li>
+                <li><%= link_to "Create New Shift", new_shift_path %></li>
+              </ul>
+            </li>
           <% elsif current_user.role?(:employee) %>
             <li><%= link_to "Stores", stores_path %></li>
             <li><%= link_to "Employee Info", employee_path(current_user.employee) %></li>
+            <li><%= link_to "Shifts", shifts_path%></li>
           <% end %>
         <% else %> 
             <li><%= link_to "Stores", stores_path %></li>

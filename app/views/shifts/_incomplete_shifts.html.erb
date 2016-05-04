@@ -1,0 +1,3 @@
+<% unless @incomplete_shifts.empty? %>
+  <%= render partial: "shift_list", locals: {shifts: @incomplete_shifts, state: 'incomplete'} %>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="small-6 columns">
+    <!-- primary partial gets displayed here in main div -->
+    <%= render partial: "#{primary}" %>    
+  </div>
+  <div class="small-6 columns">
+    <%= render partial: "#{secondary}"  unless secondary.blank? %>
+
+    <p>&nbsp;</p>
+    <%= render partial: "#{final}" unless final.blank? %>
+  </div>
+</div>
+
+<!-- Add a button for new instances of object -->
+<% if can? :create, model_name %>
+  <%= link_to(eval("new_#{model_name}_path"), class: "button radius") do %>
+  <!-- <i class="fa fa-plus"></i> -->
+  &nbsp;Add a New <%= model_name.capitalize %>
+  <% end %>
+<% end %>

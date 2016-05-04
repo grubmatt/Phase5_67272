@@ -27,6 +27,7 @@ class Store < ActiveRecord::Base
   scope :alphabetical, -> { order('name') }
   scope :active,       -> { where(active: true) }
   scope :inactive,     -> { where(active: false) }
+  scope :for_store,    ->(store_id) { where("id = ?", store_id) }
   
   
   # Misc constants
