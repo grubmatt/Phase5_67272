@@ -2,18 +2,13 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Store Flavor</legend>
 
-    <% if current_user.role?(:manager)%>
-      <%= f.input :store_id, :collection => Store.for_store(current_user.store_id),selected: current_user.store_id, input_html: {class: "avg"} %>
-    <% else %>
-      <%= f.input :store_id, :collection => Store.active.alphabetical, input_html: {class: "avg"} %>
-    <% end %>
-    
+    <%= f.input :store_id, :collection => Store.active.alphabetical, selected: @store.id, input_html: {class: "avg"} %>
     <%= f.input :flavor_id, :collection => Flavor.active.alphabetical, input_html: {class: "avg"} %>
     
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'button radius' %>
-      <%= link_to 'Cancel', store_path(current_user.store_id), :class => 'button alert radius' %>
+      <%= link_to 'Cancel', store_path(:store_id), :class => 'button alert radius' %>
     </div>
   </fieldset>
 <% end %>

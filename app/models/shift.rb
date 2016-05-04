@@ -24,6 +24,7 @@ class Shift < ActiveRecord::Base
   scope :for_past_days, ->(x) { where('date BETWEEN ? AND ?', x.days.ago.to_date, 1.day.ago.to_date) }
   scope :completed, -> { joins(:shift_jobs).group(:shift_id) }
   scope :incomplete, -> { joins("LEFT JOIN shift_jobs ON shifts.id = shift_jobs.shift_id").where('shift_jobs.job_id IS NULL') }
+  scope :most_recent, -> { order("id DESC")}
   # alternative ways of finding 'incomplete' scope:
   # scope :incomplete, -> { where('id NOT IN (?)', Shift.completed.map(&:id)) }
   # a class method to also find incomplete shifts using array operations...

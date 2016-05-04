@@ -1,5 +1,5 @@
 <div class="form-actions">
-  <% if can? :read, Employee %>
+  <% if !current_user.role?(:employee) %>
     <%= link_to employees_path, class: 'button radius' do %>
       &nbsp;<%= "Display All Employees" %>
     <% end %>
@@ -14,7 +14,7 @@
   &nbsp;&nbsp;
   
   <% if can? :destroy, Employee %>
-    <%= link_to store_path(@employee), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{@Employee.proper_name}?"}, class: 'button radius alert' do %>
+    <%= link_to store_path(@employee), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{@employee.proper_name}?"}, class: 'button radius alert' do %>
       &nbsp;<%= "Delete Employee" %>
     <% end %>
   <% end %>

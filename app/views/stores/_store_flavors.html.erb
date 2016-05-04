@@ -3,10 +3,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <% if (can? :destroy, StoreFlavor) & (current_user != nil) %>
-        <% if current_user.store_id == @current_flavors.first.store_id %>
-          <th>&nbsp;</th>
-        <% end %>
+      <% if can? :destroy, StoreFlavor %>
+        <th>&nbsp;</th>
       <% end %>
     </tr>
   </thead>
@@ -14,11 +12,9 @@
     <% @current_flavors.each do |storeflavor| %>
       <tr>
         <td> <%= storeflavor.flavor.name %></td>
-        <% if (can? :destroy, StoreFlavor) & (current_user != nil) %>
-          <% if current_user.store_id == @current_flavors.first.store_id %>
-            <td><%= link_to(eval("store_flavor_path(storeflavor)"), method: 'delete', class: 'button radius alert tiny') do %>
+        <% if can? :destroy, StoreFlavor %>
+          <td><%= link_to(eval("store_flavor_path(storeflavor)"), method: 'delete', class: 'button radius alert tiny') do %>
             &nbsp;Remove&nbsp;</td>
-            <% end %>
           <% end %>
         <% end %>
       </tr>

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', :as => :login
   get 'logout' => 'sessions#destroy', :as => :logout
 
+  get 'new_store_flavor/:store_id' => 'store_flavors#new', :as => :new_store_flavor_for_store
   get 'new_shift_job/:shift_id' => 'shift_jobs#new', :as => :new_shift_job_for_shift
 
   

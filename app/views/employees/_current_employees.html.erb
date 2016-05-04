@@ -11,7 +11,6 @@
           <th>Currently Assigned</th>
         <% end %>
         <th>Role</th>
-        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -23,13 +22,6 @@
             <td><%= link_to employee.current_assignment.store.name, store_path(employee.current_assignment.store) unless employee.current_assignment.nil? %></td>
           <% end %>
           <td><%= employee.role.capitalize %></td>
-          <td>
-            <% if can? :update, @active_employees%>
-              <%= link_to(edit_employee_path(employee), class: 'button tiny radius warning') do %>
-              &nbsp;Edit&nbsp;
-              <% end %>
-            <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>

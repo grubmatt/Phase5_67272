@@ -6,6 +6,7 @@ class StoreFlavorsController < ApplicationController
   end
 
   def new
+    @store = Store.find(params[:store_id])
     @store_flavor = StoreFlavor.new
   end
 
@@ -19,7 +20,7 @@ class StoreFlavorsController < ApplicationController
     @store_flavor = StoreFlavor.new(flavor_params)
 
     if @store_flavor.save
-      redirect_to store_path(current_user.store_id), notice: "Successfully added #{@store_flavor.flavor.name} to store."
+      redirect_to store_path(@store_flavor.store_id), notice: "Successfully added #{@store_flavor.flavor.name} to store."
     else
       render action: 'new'
     end
@@ -27,7 +28,7 @@ class StoreFlavorsController < ApplicationController
 
   def destroy
     @store_flavor.destroy
-    redirect_to store_path(current_user.store_id), notice: "Successfully removed #{@store_flavor.flavor.name} from store."
+    redirect_to store_path(@store_flavor.store_id), notice: "Successfully removed #{@store_flavor.flavor.name} from store."
   end
 
   private

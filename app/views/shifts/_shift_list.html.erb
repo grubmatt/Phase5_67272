@@ -12,20 +12,27 @@
           <th>Employee</th>
         <% end %>
         <th>Date</th>
-        <th>Start Time</th>
-        <th>End Time</th>
+        <%if state != 'recent' %>
+          <th>Start Time</th>
+          <th>End Time</th>
+        <% end %>
         <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       <% shifts.each do |shift| %>
         <tr>
+          <% if current_user.role?(:admin) %>
+            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
+          <% end %>
           <% if !current_user.role?(:employee) %>
             <td><%= link_to shift.assignment.employee.name, employee_path(shift.assignment.employee) %></td>
           <% end %>
           <td><%= shift.date.strftime("%m/%d/%y") %></td>
-          <td><%= shift.start_time.strftime("%I:%M %p") %></td>
-          <td><%= shift.end_time.strftime("%I:%M %p") %></td>
+          <% if state != 'recent'%>
+            <td><%= shift.start_time.strftime("%I:%M %p") %></td>
+            <td><%= shift.end_time.strftime("%I:%M %p") %></td>
+          <% end %>
           <td><%= link_to(shift_path(shift), class: 'button tiny radius') do %>
             &nbsp;View&nbsp;
           <% end %></td>
@@ -33,6 +40,8 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+  <% if state != 'recent'%>
+    <%= will_paginate shifts, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+  <% end %>
 <% end %>
 <p>&nbsp;</p>

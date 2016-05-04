@@ -1,1 +1,14 @@
-<%= render :partial => "partials/display_form" %>
+<div class="row">
+  <div class="small-7 columns">
+    <%= render :partial => "form" %>
+  </div>
+  <div class="small-1 columns">
+  </div>
+  <div class="small-4 columns">
+    <% if @shifts.empty? %>
+      <h3>No recent shifts</h3>
+    <% else %>
+      <%= render partial: "shift_list", locals: {shifts: @shifts, state: 'recent'} %>
+    <% end %>
+  </div>
+</div>

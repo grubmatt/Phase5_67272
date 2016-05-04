@@ -3,13 +3,13 @@
 
 <% if current_user.role?(:admin) %>
   <p>
-    <b>Store</b>: <%= link_to @shift.assignment.store.name, store_path(shift.assignment.store) %>
+    <b>Store</b>: <%= link_to @shift.assignment.store.name, store_path(@shift.assignment.store) %>
   </p>
 <% end %>
 
-<% if current_user.role?(:manager) %>
+<% if !current_user.role?(:employee) %>
   <p>
-    <b>Employee</b>: <%= link_to @shift.assignment.employee.name, employee_path(@shift.assignment.employee) %>
+    <b>Employee</b>: <%= link_to @shift.assignment.employee.proper_name, employee_path(@shift.assignment.employee) %>
   </p>
 <% end %>
 

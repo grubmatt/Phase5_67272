@@ -1,6 +1,6 @@
 <div class="form-actions">
-    <%= link_to shifts_path, class: 'button radius' do %>
-      &nbsp;<%= "Display All Shifts" %>
+    <%= link_to employee_path(@shift.assignment.employee), class: 'button radius' do %>
+      &nbsp;<%= "Display Shifts For #{@shift.assignment.employee.proper_name}" %>
     <% end %>
   &nbsp;&nbsp;
   

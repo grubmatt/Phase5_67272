@@ -4,11 +4,9 @@
   </div>
   <div class="small-5 columns">
     <%= render partial: "store_flavors" unless @current_flavors.empty? %>
-    <% if (can? :create, StoreFlavor) & (current_user != nil) %>
-  	  <% if current_user.store_id == @current_flavors.first.store_id %>
-        <%= link_to(new_store_flavor_path, class: 'button radius') do %>
+    <% if (can? :create, StoreFlavor) & (@store.active) %>
+        <%= link_to(new_store_flavor_for_store_path(@store.id), class: 'button radius') do %>
           &nbsp;<%= "Add Flavor" %>
-        <% end %>
       <% end %>
     <% end %>
   </div>

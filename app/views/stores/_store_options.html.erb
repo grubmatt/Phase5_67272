@@ -13,9 +13,9 @@
   <% end %>
   &nbsp;&nbsp;
   
-  <% if can? :destroy, Store %>
-    <%= link_to store_path(@store), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{@store.name}?"}, class: 'button radius alert' do %>
-      &nbsp;<%= "Delete Store" %>
+  <% if (can? :destroy, Store) & (@store.active)%>
+    <%= link_to store_path(@store), method: 'delete', data: {confirm: "Are you sure you want to deactivate #{@store.name}?"}, class: 'button radius alert' do %>
+      &nbsp;<%= "Deactivate Store" %>
     <% end %>
   <% end %>
 </div>
