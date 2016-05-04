@@ -5,31 +5,43 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Store</th>
-        <th>Employee</th>
+        <% if current_user.role?(:admin) %>
+          <th>Store</th>
+        <% end %>
+        <% if !current_user.role?(:employee) %>
+          <th>Employee</th>
+        <% end %>
         <th>Date</th>
         <th>Start Time</th>
-        <% if state == 'past' %>
-          <th>End Time</th>
+        <th>End Time</th>
+        <% if current_user.role?(:admin) %>
+          <th>&nbsp;</th>
         <% end %>
-        <th>&nbsp;</th>
+        <% if current_user.role?(:manager) %>
+          <th>&nbsp;</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
       <% shifts.each do |shift| %>
         <tr>
-          <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
-          <td><%= link_to shift.assignment.employee.name, employee_path(shift.assignment.employee) %></td>
+          <% if current_user.role?(:admin) %>
+            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
+          <% end %>
+          <% if !current_user.role?(:employee) %>
+            <td><%= link_to shift.assignment.employee.name, employee_path(shift.assignment.employee) %></td>
+          <% end %>
           <td><%= shift.date.strftime("%m/%d/%y") %></td>
-          <td><%= shift.start_time %></td>
-          <td><%= shift.end_time %></td>
-          <td>
-            <% if can? :update, Shift %>
-              <%= link_to(edit_shift_path(shift), class: 'button tiny radius warning') do %>
-              &nbsp;Edit&nbsp;
-              <% end %>
-            <% end %>
-          </td>
+          <td><%= shift.start_time.strftime("%I:%M %p") %></td>
+          <td><%= shift.end_time.strftime("%I:%M %p") %></td>
+          <% if can? :update, Shift %>
+            <td><%= link_to(edit_shift_path(shift), class: 'button tiny radius warning') do %>
+            &nbsp;Edit&nbsp;
+            <% end %></td>
+          <% end %>
+          <td><%= link_to(show_shift_path(shift), class: 'button tiny radius') do %>
+          &nbsp;View Shift&nbsp;
+          <% end %></td>
         </tr>
       <% end %>
     </tbody>
