@@ -17,9 +17,7 @@ class Ability
       can :crud, Shift do |shift|
         shift.store.id = user.store_id
       end
-      can [:read, :create, :destroy], ShiftJob do |shiftjob|
-        shiftjob.shift.current_assignment.store_id = user.store_id
-      end
+      can [:read, :create, :destroy], ShiftJob 
       can [:read, :create, :destroy], StoreFlavor do |storeflavor|
         storeflavor.store_id = user.store_id
       end

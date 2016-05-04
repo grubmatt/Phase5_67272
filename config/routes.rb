@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :store_flavors
-  resources :shifts
+  resources :shifts 
+  resources :shift_jobs
   
   # Semi-static page routes
   get 'home' => 'home#home', as: :home
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new', :as => :signup
   get 'login' => 'sessions#new', :as => :login
   get 'logout' => 'sessions#destroy', :as => :logout
+
+  get 'new_shift_job/:shift_id' => 'shift_jobs#new', :as => :new_shift_job_for_shift
 
   
   # Set the root url

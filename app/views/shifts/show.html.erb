@@ -9,7 +9,7 @@
       <%= render partial: "shift_job_history"%>
     <% end %>
     <% if can? :create, ShiftJob %>
-      <%= link_to(new_shift_job_path, class: 'button radius') do %>
+      <%= link_to(new_shift_job_for_shift_path(@shift.id), class: 'button radius') do %>
         &nbsp;<%= "Add Job" %>
       <% end %>
     <% end %>
