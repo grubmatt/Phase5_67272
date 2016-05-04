@@ -12,10 +12,9 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  # def show
-  #   # get the shift history for this assignment (later; empty now)
-  #   @shifts = Array.new
-  # end
+  def show
+    @assignments = @assignment.employee.assignments.chronological.paginate(page: params[:page]).per_page(5)
+  end
 
   def new
     @assignment = Assignment.new

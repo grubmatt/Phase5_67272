@@ -4,9 +4,11 @@
   <b>Store</b>: <%= link_to @assignment.store.name, store_path(@assignment.store) %>
 </p>
 
-<p>
-  <b>Employee</b>: <%= link_to @assignment.employee.name, employee_path(@assignment.employee) %>
-</p>
+<% if !current_user.role?(:employee) %>
+  <p>
+    <b>Employee</b>: <%= link_to @assignment.employee.name, employee_path(@assignment.employee) %>
+  </p>
+<% end %>
 
 <p>
   <b>Start date</b>: <%= @assignment.start_date.strftime("%m/%d/%y") %>

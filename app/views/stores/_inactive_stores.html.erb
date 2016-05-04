@@ -1,4 +1,4 @@
-<% unless @inactive_stores.empty? %>
+<% if current_user.role?(:admin) & !@inactive_stores.empty? %>
   <div class="panel callout radius">
     <h3>Inactive Stores</h3>
     <ul>

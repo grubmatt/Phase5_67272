@@ -56,6 +56,7 @@
           <% elsif current_user.role?(:employee) %>
             <li><%= link_to "Stores", stores_path %></li>
             <li><%= link_to "Employee Info", employee_path(current_user.employee) %></li>
+            <li><%= link_to "Assignment Info", assignment_path(current_user.employee.current_assignment) %></li>
             <li><%= link_to "Shifts", shifts_path%></li>
           <% end %>
         <% else %> 

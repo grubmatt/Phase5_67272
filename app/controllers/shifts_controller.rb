@@ -6,15 +6,15 @@ class ShiftsController < ApplicationController
   	if current_user.role?(:admin)
       @upcoming_shifts = Shift.upcoming.by_store.chronological.paginate(page: params[:page]).per_page(10)
       @incomplete_shifts = Shift.past.incomplete.by_store.chronological.paginate(page: params[:page]).per_page(10)
-      @complete_shifts = Shift.past.completed.by_store.chronological.paginate(page: params[:page]).per_page(10)
+      @completed_shifts = Shift.past.completed.by_store.chronological.paginate(page: params[:page]).per_page(10)
     elsif current_user.role?(:manager)
       @upcoming_shifts = Shift.upcoming.for_store(current_user.store_id).chronological.paginate(page: params[:page]).per_page(10)
       @incomplete_shifts = Shift.past.incomplete.for_store(current_user.store_id).chronological.paginate(page: params[:page]).per_page(10)
-      @complete_shifts = Shift.past.completed.for_store(current_user.store_id).chronological.paginate(page: params[:page]).per_page(10)
+      @completed_shifts = Shift.past.completed.for_store(current_user.store_id).chronological.paginate(page: params[:page]).per_page(10)
     else
       @upcoming_shifts = Shift.upcoming.for_employee(current_user.employee_id).chronological.paginate(page: params[:page]).per_page(10)      
       @incomplete_shifts = Shift.past.incomplete.for_employee(current_user.employee_id).chronological.paginate(page: params[:page]).per_page(10)
-      @complete_shifts = Shift.past.completed.for_employee(current_user.employee_id).chronological.paginate(page: params[:page]).per_page(10)
+      @completed_shifts = Shift.past.completed.for_employee(current_user.employee_id).chronological.paginate(page: params[:page]).per_page(10)
     end
   end
 
