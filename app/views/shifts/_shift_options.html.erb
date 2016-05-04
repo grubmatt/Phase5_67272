@@ -1,0 +1,19 @@
+<div class="form-actions">
+    <%= link_to shifts_path, class: 'button radius' do %>
+      &nbsp;<%= "Display All Shifts" %>
+    <% end %>
+  &nbsp;&nbsp;
+  
+  <% if !current_user.role?(:employee) %>
+    <%= link_to edit_shift_path(@shift) , class: 'button radius' do %>
+      &nbsp;<%= "Edit Shift" %>
+    <% end %>
+  <% end %>
+  &nbsp;&nbsp;
+  
+  <% if !current_user.role?(:employee) %>
+    <%= link_to shift_path(@shift), method: 'delete', data: {confirm: "Are you sure you want to permanently delete this shift?"}, class: 'button radius alert' do %>
+      &nbsp;<%= "Delete Shift" %>
+    <% end %>
+  <% end %>
+</div>

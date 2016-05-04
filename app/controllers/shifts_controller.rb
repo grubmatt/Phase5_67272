@@ -28,6 +28,11 @@ class ShiftsController < ApplicationController
   end
 
   def update
+    if @shift.update(shift_params)
+      redirect_to shifts_path, notice: "The shift has been updated."
+    else
+      render action: 'edit'
+    end
   end
 
   def show
@@ -46,7 +51,7 @@ class ShiftsController < ApplicationController
 
   def destroy
     @shift.destroy
-    redirect_to shift_path(@shift), notice: "Successfully removed shift."
+    redirect_to shifts_path, notice: "Successfully removed shift."
   end
 
   private

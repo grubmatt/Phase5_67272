@@ -1,0 +1,21 @@
+<div class="form-actions">
+  <% if can? :read, Employee %>
+    <%= link_to employees_path, class: 'button radius' do %>
+      &nbsp;<%= "Display All Employees" %>
+    <% end %>
+  <% end %>
+  &nbsp;&nbsp;
+  
+  <% if can? :update, @employee %>
+    <%= link_to edit_employee_path(@employee) , class: 'button radius' do %>
+      &nbsp;<%= "Edit Employee" %>
+    <% end %>
+  <% end %>
+  &nbsp;&nbsp;
+  
+  <% if can? :destroy, Employee %>
+    <%= link_to store_path(@employee), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{@Employee.proper_name}?"}, class: 'button radius alert' do %>
+      &nbsp;<%= "Delete Employee" %>
+    <% end %>
+  <% end %>
+</div>

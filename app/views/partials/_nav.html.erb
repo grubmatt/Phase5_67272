@@ -52,8 +52,8 @@
               </ul>
             </li>
           <% elsif current_user.role?(:employee) %>
-            <li><%= link_to "Shifts", shifts_path%></li>
             <li><%= link_to "Stores", stores_path %></li>
+            <li><%= link_to "Shifts", shifts_path%></li>
           <% end %>
         <% else %>
           <li><%= link_to "Stores", stores_path %></li>

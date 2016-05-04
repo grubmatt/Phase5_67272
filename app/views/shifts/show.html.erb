@@ -8,8 +8,14 @@
     <% else %>
       <%= render partial: "shift_job_history"%>
     <% end %>
+    <% if can? :create, ShiftJob %>
+      <%= link_to(new_shift_job_path, class: 'button radius') do %>
+        &nbsp;<%= "Add Job" %>
+      <% end %>
+    <% end %>
+    &nbsp;&nbsp;
   </div>
 </div>
 
 <!-- Add buttons to list all, edit project or destroy object -->
-<%= render partial: "partials/object_options", locals: {model_name: "shift", object: @shift}  %>
+<%= render partial: "shift_options" %>

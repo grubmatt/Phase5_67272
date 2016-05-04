@@ -1,0 +1,21 @@
+<div class="form-actions">
+  <% if can? :read, Store %>
+    <%= link_to stores_path, class: 'button radius' do %>
+      &nbsp;<%= "Display All Stores" %>
+    <% end %>
+  <% end %>
+  &nbsp;&nbsp;
+  
+  <% if can? :update, @store %>
+    <%= link_to edit_store_path(@store) , class: 'button radius' do %>
+      &nbsp;<%= "Edit Store" %>
+    <% end %>
+  <% end %>
+  &nbsp;&nbsp;
+  
+  <% if can? :destroy, Store %>
+    <%= link_to store_path(@store), method: 'delete', data: {confirm: "Are you sure you want to permanently delete #{@store.name}?"}, class: 'button radius alert' do %>
+      &nbsp;<%= "Delete Store" %>
+    <% end %>
+  <% end %>
+</div>

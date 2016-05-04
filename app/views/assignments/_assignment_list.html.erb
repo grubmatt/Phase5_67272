@@ -14,9 +14,7 @@
         <% if state == 'past' %>
           <th>End Date</th>
         <% end %>
-        <% if current_user.role?(:admin) %>
-          <th>&nbsp;</th>
-        <% end %>
+        <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -31,11 +29,9 @@
           <% if state == 'past' %>
             <td><%= assignment.end_date.strftime("%m/%d/%y") %></td>
           <% end %>
-          <% if can? :update, Assignment %>
-            <td><%= link_to(edit_assignment_path(assignment), class: 'button tiny radius warning') do %>
-            &nbsp;Edit&nbsp;
-            <% end %></td>
-          <% end %>
+          <td><%= link_to(assignment_path(assignment), class: 'button tiny radius') do %>
+            &nbsp;View&nbsp;
+          <% end %></td>
         </tr>
       <% end %>
     </tbody>

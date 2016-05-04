@@ -24,10 +24,4 @@
   </tbody>
 </table>
 
-<% if can? :create, ShiftJob %>
-  <%= link_to(new_shift_job_path, class: 'button radius') do %>
-    &nbsp;<%= "Add Job" %>
-  <% end %>
-<% end %>
-    &nbsp;&nbsp;
 <%= will_paginate @shift_jobs, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
