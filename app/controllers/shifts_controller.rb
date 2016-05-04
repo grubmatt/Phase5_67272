@@ -22,7 +22,6 @@ class ShiftsController < ApplicationController
     if current_user.role?(:admin)
       @shifts = Shift.most_recent.limit(5)
     else
-      asdasd
       @shifts = Shift.for_store(current_user.store_id).most_recent.limit(5)
     end
     @previous_shift = Shift.last
