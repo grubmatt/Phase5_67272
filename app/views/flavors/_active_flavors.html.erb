@@ -1,0 +1,27 @@
+<% if @active_flavors.empty? %>
+  <p><em>There are no current flavors at this time.</em></p>
+<% else %>
+  <h3>Current Flavors</h3>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_flavors.each do |flavor| %>
+        <tr>
+          <td><%= flavor.name %></td>
+          <% if !current_user.role?(:employee) %>
+            <td><%= link_to flavor_path(flavor), method: 'delete', data: {confirm: "Are you sure you want to permanently delete this flavor?"}, class: 'button radius tiny alert' do %>
+                &nbsp;<%= "Remove" %>
+            <% end %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @active_flavors, :previous_label => "Previous&nbsp;", :next_label => "&nbsp;Next" %>
+
+<% end %>

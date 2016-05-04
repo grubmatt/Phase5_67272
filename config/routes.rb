@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :store_flavors
+  resources :flavors
   resources :shifts 
   resources :shift_jobs
   
