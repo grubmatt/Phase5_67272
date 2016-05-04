@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   include CreameryHelpers::Validations
 
   has_secure_password
+  after_save :employee_is_active_in_system
 
   # Relationships
   belongs_to :employee
@@ -10,7 +11,6 @@ class User < ActiveRecord::Base
   # Validations
   validates_uniqueness_of :email, case_sensitive: false
   validates_format_of :email, :with => /\A[\w]([^@\s,;]+)@(([\w-]+\.)+(com|edu|org|net|gov|mil|biz|info))\z/i, :message => "is not a valid format"
-  validate :employee_is_active_in_system
 
   def self.authenticate(email,password)
     find_by_email(email).try(:authenticate, password)
