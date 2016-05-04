@@ -1,7 +1,8 @@
 <h3>Assignment Details</h3>
-<br />
 <p>
-  <b>Store</b>: <%= link_to @assignment.store.name, store_path(@assignment.store) %>
+  <h4>
+    <b>Store</b>: <%= link_to @assignment.store.name, store_path(@assignment.store) %>
+  </h4>
 </p>
 
 <% if !current_user.role?(:employee) %>
@@ -14,14 +15,11 @@
   <b>Start date</b>: <%= @assignment.start_date.strftime("%m/%d/%y") %>
 </p>
 
-<p>
-  <b>End date</b>: 
-  <% if @assignment.end_date.nil? %>
-    &nbsp;&nbsp;<em>TBD</em>
-  <% else %>
-    <%= @assignment.end_date.strftime("%m/%d/%y") %>
-  <% end %>
-</p>
+<% if !@assignment.end_date.nil? %>
+  <p>
+    <b>End date</b>: <%= @assignment.end_date.strftime("%m/%d/%y") %>
+  </p>
+<% end%>
 
 <p>
   <b>Pay level</b>: <%= @assignment.pay_level %>

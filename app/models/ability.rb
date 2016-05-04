@@ -12,7 +12,7 @@ class Ability
         employee.current_assignment.store_id = user.store_id
       end
       can :read, Assignment do |assignment|
-        current_assignment.store_id = user.store_id
+        assignment.store_id = user.store_id
       end
       can :crud, Shift do |shift|
         shift.store.id = user.store_id
@@ -27,12 +27,12 @@ class Ability
       can :read, [Store, Job, Flavor]
       can [:read, :update], Employee, :id => user.employee_id
       can [:read, :update], User, :id => user.id
-      can :read, Assignment, :id => user.employee.current_assignment.id
+      can :read, Assignment, :employee_id => user.employee.id
       can :read, Shift do |shift|
         shift.assignment.id = user.employee.current_assignment.id
       end 
     else
-      can :read, Store
+      can :read, Store, :active => true
     end
   end
 end

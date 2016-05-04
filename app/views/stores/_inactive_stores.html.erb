@@ -1,10 +1,12 @@
-<% if current_user.role?(:admin) & !@inactive_stores.empty? %>
-  <div class="panel callout radius">
-    <h3>Inactive Stores</h3>
-    <ul>
-      <% @inactive_stores.each do |store| %>
-        <li><%= link_to store.name, store_path(store) %></li>
-      <% end %>
-    </ul>
-  </div>
+<% unless @inactive_stores.empty? %>
+  <% if current_user != nil %>
+	  <div class="panel callout radius">
+	    <h3>Inactive Stores</h3>
+	    <ul>
+	      <% @inactive_stores.each do |store| %>
+	        <li><%= link_to store.name, store_path(store) %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+  <% end %>
 <% end %>

@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def store_id
-    self.employee.current_assignment.store_id
+    self.employee.current_assignment.store_id unless self.employee.current_assignment == nil
   end
 
   private

@@ -3,7 +3,11 @@
     <%= render partial: "employee_details" %>
   </div>
   <div class="small-5 columns">
-    <%= render partial: "shift_history" unless @shifts.empty?%>
+    <% if @shifts.empty? %>
+      <h3>No upcoming shifts</h3>
+    <% else %>
+      <%= render partial: "shift_history" %>
+    <% end %>
   </div>
 </div>
 

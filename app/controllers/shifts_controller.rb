@@ -20,6 +20,7 @@ class ShiftsController < ApplicationController
 
   def new
     @shift = Shift.new
+    @shift.assignment_id
   end
 
   def edit
@@ -36,7 +37,7 @@ class ShiftsController < ApplicationController
     @shift = Shift.new(shift_params)
 
     if @shift.save
-      redirect_to shift_path(@shift), notice: "Successfully added new shift."
+      redirect_to employee_path(@shift.assignment.employee), notice: "Successfully added new shift."
     else
       render action: 'new'
     end
