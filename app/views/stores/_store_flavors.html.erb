@@ -3,19 +3,27 @@
   <thead>
     <tr>
       <th>Name</th>
+      <% if (can? :destroy, StoreFlavor) & (current_user.store_id == @current_flavors.first.store_id)%>
+        <th>Remove</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
     <% @current_flavors.each do |storeflavor| %>
       <tr>
         <td> <%= storeflavor.flavor.name %></td>
+        <% if (can? :destroy, StoreFlavor) & (current_user.store_id == @current_flavors.first.store_id)%>
+          <td><%= link_to(eval("store_flavor_path(storeflavor)"), method: 'delete', class: 'button radius alert') do %>
+          &nbsp;Remove&nbsp;</td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <% if (can? :create, StoreFlavor) & (current_user.store_id == @current_flavors.first.store_id) %>
-  <%= link_to(new_storeflavor_path, class: 'button radius') do %>
+  <%= link_to(new_store_flavor_path, class: 'button radius') do %>
     &nbsp;<%= "Add Flavor" %>
   <% end %>
 <% end %>
