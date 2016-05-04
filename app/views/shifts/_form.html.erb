@@ -2,9 +2,13 @@
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Shift</legend>
 
-    <%= f.input :assignment_id, :label => "Shift For: ", :collection => Assignment.current.by_employee, label_method: lambda{|x| x.employee.proper_name}, value_method: :id, :include_blank => true, input_html: {class: "avg"} %>
-    <%= f.input :date, :label => "Date", as: :string, :input_html => {:class => "avg datepicker"} %>
-    <%= f.input :start_time, input_html: {class: "avg"} %>
+    <% if current_user.role?(:admin) %>
+      <%= f.input :assignment_id, :label => "Shift For", :collection => Assignment.current.by_store.by_employee, label_method: lambda{|x| x.employee.proper_name}, value_method: :id, :include_blank => true, input_html: {class: "avg"} %>
+    <% else %>
+      <%= f.input :assignment_id, :label => "Shift For", :collection => Assignment.current.by_employee.for_store(current_user.store_id),selected: @previous_shift.assignment_id, label_method: lambda{|x| x.employee.proper_name}, value_method: :id, :include_blank => true, input_html: { class: "avg"} %>
+    <% end %>
+    <%= f.input :date, as: :string, :input_html => {value: @previous_shift.date.strftime('%B %d, %Y'), :class => "avg datepicker"} %>
+    <%= f.input :start_time, default: @previous_shift.start_time, input_html: { class: "avg"} %>
     <%= f.input :notes, input_html: {class: "avg"} %>
 
     <div class="form-actions">

@@ -14,29 +14,18 @@
         <th>Date</th>
         <th>Start Time</th>
         <th>End Time</th>
-        <% if current_user.role?(:admin) %>
-          <th>&nbsp;</th>
-        <% end %>
         <th>&nbsp;</th>
       </tr>
     </thead>
     <tbody>
       <% shifts.each do |shift| %>
         <tr>
-          <% if current_user.role?(:admin) %>
-            <td><%= link_to shift.assignment.store.name, store_path(shift.assignment.store) %></td>
-          <% end %>
           <% if !current_user.role?(:employee) %>
             <td><%= link_to shift.assignment.employee.name, employee_path(shift.assignment.employee) %></td>
           <% end %>
           <td><%= shift.date.strftime("%m/%d/%y") %></td>
           <td><%= shift.start_time.strftime("%I:%M %p") %></td>
           <td><%= shift.end_time.strftime("%I:%M %p") %></td>
-          <% if can? :update, Shift %>
-            <td><%= link_to(edit_shift_path(shift), class: 'button tiny radius warning') do %>
-            &nbsp;Edit&nbsp;
-            <% end %></td>
-          <% end %>
           <td><%= link_to(shift_path(shift), class: 'button tiny radius') do %>
             &nbsp;View&nbsp;
           <% end %></td>
